@@ -2,3 +2,5 @@ data/
 diffusiondb/
 metadata.parquet
 .vscode
+private/
+certs/
