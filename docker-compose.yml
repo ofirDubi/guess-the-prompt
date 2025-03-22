@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+
+  gtp-client-curr:
+    image: gtp-client
+    restart: always
+    # expose:
+    #   - "4455"
+    # environment:
+    #   - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID} # this doesn't matter because i poass it in the docker build!
+    networks:
+      - caddy_network
+
+  gtp-server-curr:
+    image: gtp-server
+    restart: always
+    expose:
+      - "4455"
+    # environment:
+    #   - REPLICATE_API_TOKEN=${REPLICATE_API_TOKEN}
+    networks:
+      - caddy_network
+
+
+  caddy_reverse_proxy:
+    image: caddy:latest
+    restart: always
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./certs:/etc/ssl/certs/custom
+      - ./private:/etc/ssl/private/custom
+      - caddy_data:/data
+      - caddy_config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - caddy_network
+    depends_on:
+      - gtp-client-curr
+      - gtp-server-curr
+
+  dozzle:
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./dozzle:/data
+    ports:
+      - 8080:8080
+    environment:
+      DOZZLE_AUTH_PROVIDER: simple
+
+networks:
+  caddy_network:
+
+volumes:
+  caddy_data:
+  caddy_config:

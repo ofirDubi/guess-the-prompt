@@ -1,0 +1,6 @@
+[submodule "gtp-server"]
+	path = gtp-server
+	url = git@github.com:ofirDubi/guess-the-prompt-server.git
+[submodule "gtp-client"]
+	path = gtp-client
+	url = git@github.com:ofirDubi/image-prompt-quest.git

@@ -1,0 +1,4 @@
+data/
+diffusiondb/
+metadata.parquet
+.vscode

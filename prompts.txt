@@ -1,0 +1,82 @@
+make the following changes - 
+in the function "fetchGameImage" when fetching the image from the server, change the function so that the server will not return the prompt of the image, only the prompt length.  
+
+
+Add a user system to the game. sign up and login buttons at the upper right corner of the screen. next to those buttons show the current logged on user and the total score of that users.
+users who have not logged in will be playing as guests which start with 0 score. 
+At each currect guess send an api request to the server so it will know to update the user's current score. also update the score displayed on the UI.
+
+The game discribed this far is a game mode called "Casual Play". Add another game mode called "The Daily Image" in which each day the server will send a new image and prompt. 
+There will be a different score table for "The Daily Image" mode. when the user submits his guess in this game mode it will be sent to the server and added to a dedicated score sum for this game mode.
+Once the user submitted his guess for this game mode he will be prompted to return tomorrow for the new image and a ticking time clock which counts backwords to the new image apperence will be displayed.  
+
+Add a leaderboard page. the leaderboard page will send a request to the server which will return the top 1000 users and their scores.
+The leaderboard page will displayed these users in a scrolable table. 
+
+
+Make the website mobile compatib
+
+
+
+-------
+
+
+make the following changes - 
+1. When pressing the button turn them into a loading wheel so the user will see some responce from the UI even if the server has not responded yet.
+2. When presenting the results of the guess you will receive from the server the words which where an exsact match to the prompts and the words which were not an exact match but where similar and contributed to the score. paint in green the part of the guess which perfectly corresponded to the prompt, paint in dark yellow the parts which where similar to the prompt but not an extact match.
+3. change the "How To Play" section so it will include instruction on the current game mode - in casual play you can play infinite number of images. In daily challenge there is one hand-picked challenging image whith a longer prompt each day.
+4. When signin up add another field to verify the password. Also add a little prompt that says that the username entered will be displayed in the leaderboard.  
+5. Guests cannot submit answers to the daily challenge. if a guest tries to submit a guess show a popup which asks him to sign up in order to submit answers for the daily challenge. 
+6. Add a background to the leaderboard button. 
+6. In mobile view some of the icons in the upper part of the screen are not visable because the resolution is not wide enough. fix this so all icons will be viewable in mobile version. It is very important that the web page will look good on mobile phones as they are the main costumers of this application. Do the necessery changes so that the UX will be excellent on phone screens.
+7. instead of sending the password, send a hash of the password.
+8. add a comment block in the code in "gameServices.ts" which specifies exactly the api that is expected from the serve. for each requests that is sent specify the fields of the request and their data type, and for each expected response specify the expected response fields and data types.
+
+-----
+
+make the following changes while keeping in mind that the app should have excellent UI and UX on mobile - 
+1. in the text that says the length of the prompt, add a little icon of a question mark. when the user hovers over the question mark, a popup will appear which will explain what the prompt length means.
+2. in the text that says the length of the prompt, bold the number of the prompt length, and paint it in a scale from green to red depending on the number. 4 should be green, 6-8 should be yellow, 9 and above should be red.
+3. in mobile the mode selection pane overlaps with the "how to play" pane. fix it so they won't overlap.
+4. if the user tried to submit an empty guess, show a popup that says "Input your guess before submitting"
+5. introduce a new game mode - "progress mode" This is a level-based mode. In each level the user will need to guess the prompt of 10 images before unlocking the next level.
+  
+
+This game mode supports 10 levels, with 10 images in each level. When presenting an image in this game mode, show the level number and the image number in the level out of the total images in this level.
+Upon login the app will receive from the server the current level state of the user. By default the guest user will start at level 1 with no images guessed.   
+
+The view for this game mode should consists of 10 blocks which represent the levels. each block will have a number, and the number of accomplished images guessed in it by the user out of the total number of images in it.
+the level block will be faded out and have a lock icon on it if the level is locked. 
+Once the user clicks on a level block, the next unguessed images of this level will be fetched from the server and presented to the user.
+
+In this mode when the user submits a guess he will be presented with his guesses score and similar words highlighting. The user succeeds if the score he got was over 80%. If the user succeeds he will be shown the original prompt and be able to move to the next image in the level. 
+If the user fails his guess, he can submit another guess. 
+
+This mode will not have scores which are sent to the server. instead of scores the server will keep track of the number of guesses it took for the user to pass each level.
+The leaderboard for this mode will show the top 1000 users with the least number of guesses in average per level. 
+
+When the user finishes a level, show a popup which says "Congratulations! You have passed level X" and show the user how many guesses it took him to pass this level. 
+Give the user an option to share his success on social media.  
+
+The user can always go back to previous levels and try to guess the images again.
+
+
+
+----
+
+make the following changes
+1. highlight the game mode when hovered over in the mode selection pane.
+2. When in development mode, wait less time for a response from the server before timing out.
+3. When in development mode, if the user submits "fail" as a guess to the prompt, return a placeholder of 0 score.
+4. Add to the leaderboard a tab for the "progress" game mode.
+5. the question mark in the prompt length text doesnt do anything on moblie. make it clickable so if the user clicks it, it will display the text.
+6. When the user switches to "Progress" game mode, right now the server does not wait to get the inf 
+7. Right now the authentication is done by react Auth provider. Change it so the authentication is done by sending the hashed password and username to the server.
+Upon successfull login the server will return a token which will be stored in the local storage. This token will be used as a user ID for the server to identify the user. This token will be sent to the server instead of the userID which is now sent.
+Remember to add documentation to about the authentication API requests to the server.
+8. Create a text file which contains all the documentation on the API requests between the client and the server.
+
+
+----
+make the following changes - 
+1. only allow registered users to play progress mode. if a guest tries to access it, instead of an image show a message that asks the user to register or sign in in order to play progress mode. 
