@@ -1,5 +1,5 @@
 guesstheprompt.online {
   reverse_proxy /api/* gtp-server-curr:4455
   reverse_proxy /* gtp-client-curr:3000
-  tls /etc/ssl/certs/custom/guesstheprompt-cert.pem /etc/ssl/private/custom/guesstheprompt-cert.pem
+  tls /etc/ssl/certs/custom/guesstheprompt-cert.pem /etc/ssl/private/custom/guesstheprompt.pem
 }
