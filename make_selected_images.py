@@ -2,9 +2,10 @@ import pandas as pd
 import os
 
 data_dir = "data"
-def main():
-    # Load base dataset
-    df = pd.read_csv(os.path.join(data_dir,'base_dataset.csv'))
+
+def make_selected_images(csv_path="base_images.csv"):
+     # Load base dataset
+    df = pd.read_csv(os.path.join(data_dir, csv_path))
 
     # Sort images by prompt length (ascending for progressive difficulty)
     df_sorted = df.sort_values(by='prompt_length', ascending=True)
@@ -36,6 +37,8 @@ def main():
     print(f"- {len(df_selected)} total images")
     print(f"- {len(df_selected[df_selected['type']=='daily'])} daily challenges")
 
+def main():
+   make_selected_images("new_images\\prompts_metadata.csv")
 
 if __name__ == "__main__":
     main()

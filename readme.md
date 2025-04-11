@@ -3,9 +3,9 @@ Some of the images (especcially in the same part) have very similar if not ident
 @TODO -
 1. filter the images to prevent these duplications
 2. images are not so good, descriptions are complicated and not fun
+ssh of@23.94.186.55 -p 51541
 
 # Server
-1. 
 
 # Web (lovable)
 @TODO - 
@@ -18,6 +18,11 @@ Some of the images (especcially in the same part) have very similar if not ident
 2. flask run
 ## client
 npm run dev
+
+
+# Deployment todo -
+1. fix dockerfile for client, it is now working with nextjs which i dont use in this project.
+2. check that everything works - I didn't generate server cert and keys so maybe that is something that i need to do? 
 
 
 
@@ -169,3 +174,25 @@ keep the user's previous guess in the input box of the guesses after submiting a
 make the following changes -
 1. In daily Challenge mode, if the user tries to reveal the prompt show a popup that warns him that after revealing the propmt any further guesses will not be counted in his score. Give the user the option to return without revealing the prompt or to continue and reveal the prompt
 2. In daily Challenge mode if the user chooses to reveal the original prompt, send an appropriate request to the server so he will know that the user has revealed the prompt and will not add to it's score for any following guesses in that day. 
+3. when reveling the prompt to the user, there is an issue in which if the prompt is too long it goes out of the screen. fix this.
+4. The score below the username does not update. do the necessary changes to update it and explain what you did
+5. In mobile, the text of "Reveal Original Prompt and Try Another Image" is out of bounds. I think in general there is a problem that too long text are going out of bounds instead of starting a new line in their container. fix this
+6. In Progress mode, if a guest user tries to access it show a popup that says he has to register or sign in before playing in progress mode, and do not redirect him to progress page.
+7. When showing guess results, put the results below the input textbox that is used for the guesses. right now the guess input textbox is below them, so you only have to flip their order
+8. make the site description which apears when searching google match popular keywoards related to image guessing, AI, games. 
+9. Add the following google tah code so it will be immidiately after the <head> element of every webbsite - 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S9FYP52FFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S9FYP52FFD');
+</script>
+
+
+make the following changes -
+1. When text wraps around containers it breaks mid-word, change the containers so the text wrap will be on entire words. 
+
+Implement these changes one by one, be careful to not break any previous features of the site. 
